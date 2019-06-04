@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { LayoutRoutingModule } from './layout-routing.module';
 
 import { HeaderComponent } from './header/header.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { WithFullLayoutComponent } from './with-full-layout/with-full-layout.component';
@@ -20,8 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     HeaderComponent,
     FooterComponent,
     WithFullLayoutComponent,
-    WithFooterOnlyLayoutComponent,
-    SidenavComponent
+    WithFooterOnlyLayoutComponent
   ],
   imports: [
     CommonModule,
