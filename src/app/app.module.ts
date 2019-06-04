@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core/core.module';
-// import { PagesModule } from './pages/pages.module';
+import { SharedModule } from './shared/shared.module';
+
 import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { LayoutModule } from './layout/layout.module';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
+    SharedModule,
 
     // Routing
     LayoutModule,

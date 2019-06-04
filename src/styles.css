@@ -2,3 +2,17 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container, main {
+  width: 65vw;
+  margin: 0 auto;
+}
+
+.spacing {
+  flex: 1 1 auto;
+}
+
+main {
+  box-sizing: border-box;
+  padding: 0 0.5rem;
+}
