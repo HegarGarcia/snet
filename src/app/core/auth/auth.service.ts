@@ -10,12 +10,12 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 export interface IUser {
-  uid: any;
-  name: any;
-  photoURL: any;
-  email: any;
-  address?: any;
-  phone?: any;
+  uid: string;
+  name: string;
+  photoURL: string;
+  email: string;
+  address?: string;
+  phone?: string;
 }
 
 @Injectable({
@@ -51,19 +51,26 @@ export class AuthService {
   }
 
   private async signInWithProvider(provider: auth.AuthProvider) {
-    const { user } = await this.afAuth.auth.signInWithPopup(provider);
-    const userData: IUser = {
-      uid: user.uid,
-      name: user.displayName,
-      email: user.email,
-      photoURL: user.photoURL
-    };
+    const { user, additionalUserInfo } = await this.afAuth.auth.signInWithPopup(
+      provider
+    );
 
-    this.afs.doc(`users/${user.uid}`).set(userData);
+    if (additionalUserInfo.isNewUser) {
+      const userData: IUser = {
+        uid: user.uid,
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL
+      };
+
+      this.afs.doc(`users/${user.uid}`).set(userData);
+    }
+
+    this.router.navigate(['/']);
   }
 
   public async signOut() {
     await this.afAuth.auth.signOut();
-    this.router.navigate(['/']);
+    this.router.navigate(['login']);
   }
 }
