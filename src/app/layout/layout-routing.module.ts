@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WithFullLayoutComponent } from './with-full-layout/with-full-layout.component';
+import { AuthGuard } from '@core/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,7 +10,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: '../pages/pages.module#PagesModule'
+        canActivate: [AuthGuard],
+        loadChildren: '../home/home.module#HomeModule'
+      },
+      {
+        path: 'login',
+        loadChildren: '../login/login.module#LoginModule'
       }
     ]
   }

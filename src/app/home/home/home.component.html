@@ -1,0 +1,2 @@
+<h2>Home</h2>
+<button *ngIf="auth.user | async" (click)="auth.signOut()">Logout</button>

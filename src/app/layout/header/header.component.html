@@ -1,11 +1,29 @@
 <header>
   <mat-toolbar color="primary">
-    <div class="container">
-      <a [routerLink]="['/']" mat-icon-button>
-        <mat-icon>person</mat-icon>
-      </a>
-      <span class="spacing"></span>
-      <span>Hola</span>
+    <a [routerLink]="['/']" mat-icon-button>
+      <mat-icon class="brand__logo">home</mat-icon>
+      <!-- <span>Home</span> -->
+    </a>
+    <span class="spacing"></span>
+    <span>SNET</span>
+    <span class="spacing"></span>
+    <div
+      *ngIf="auth.user | async as user; else icon"
+      class="profile_container"
+      [matMenuTriggerFor]="profileMenu"
+    >
+      <img class="profile_picture" src="{{ user.photoURL }}" />
+
+      <mat-menu #profileMenu="matMenu" xPosition="before">
+        <button mat-menu-item disableRipple="true">{{ user.name }}</button>
+        <button mat-menu-item (click)="auth.signOut()">Cerrar sesión</button>
+      </mat-menu>
     </div>
+
+    <ng-template #icon>
+      <div class="profile_container">
+        <mat-icon class="profile_placeholder">person</mat-icon>
+      </div>
+    </ng-template>
   </mat-toolbar>
 </header>
