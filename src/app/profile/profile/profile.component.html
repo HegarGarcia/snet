@@ -1,0 +1,21 @@
+<div *ngIf="auth.user | async as user; else icon">
+  <img
+    class="profilePic"
+    src="{{
+      user.photoURL ||
+        'https://firebasestorage.googleapis.com/v0/b/snet2019.appspot.com/o/profile_pictures%2Fdefault.png?alt=media&token=56057ab4-47a9-4e98-95ff-f3a77064b368'
+    }}"
+  />
+  <h1>{{ user.name }}</h1>
+  <mat-tab-group>
+    <mat-tab label="Publicaciones">
+      <h1>aqui los posts xd</h1>
+    </mat-tab>
+    <mat-tab label="Información">
+      <p>Nombre: {{ user.name }}</p>
+      <p>Correo Electronico: {{ user.email }}</p>
+      <p>Telefono: xd</p>
+      <p>No se que mas poner aiuda</p>
+    </mat-tab>
+  </mat-tab-group>
+</div>
