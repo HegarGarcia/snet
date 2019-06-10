@@ -40,6 +40,44 @@ export class AuthService {
     );
   }
 
+  public async signUpWithEmailAndPassword(
+    email: string,
+    password: string,
+    displayName: string
+  ) {
+    return this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(async ({ user }) => {
+        await user.updateProfile({ displayName });
+        await this.afAuth.auth.currentUser.sendEmailVerification();
+        this.signOut();
+        return 'Necesitamos validar tu usuario, checa tu email para la confirmación';
+      })
+      .catch(({ code }) => code);
+  }
+
+  public async signInWIthEmailAndPassword(email: string, password: string) {
+    return this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        if (user.emailVerified !== true) {
+          this.router.navigate(['verify']);
+        }
+
+        const userData: IUser = {
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL || ''
+        };
+
+        this.afs.doc(`users/${user.uid}`).set(userData);
+
+        this.router.navigate(['/']);
+      })
+      .catch(({ code }) => code);
+  }
+
   public async signInWithGoogle() {
     const provider = new auth.GoogleAuthProvider();
     await this.signInWithProvider(provider);

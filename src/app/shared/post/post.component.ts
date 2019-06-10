@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { IPost } from '@core/posts/posts.service';
+
+import { IPost, PostsService } from '@core/posts/posts.service';
+import { IUser } from '@core/auth/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -9,5 +11,11 @@ import { IPost } from '@core/posts/posts.service';
 export class PostComponent {
   @Input() post: IPost;
 
-  constructor() {}
+  public user: IUser;
+
+  constructor(public posts: PostsService) {}
+
+  like() {
+    this.posts.like(this.post.id);
+  }
 }

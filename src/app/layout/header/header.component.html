@@ -12,7 +12,13 @@
       class="profile_container"
       [matMenuTriggerFor]="profileMenu"
     >
-      <img class="profile_picture" src="{{ user.photoURL }}" />
+      <img
+        class="profile_picture"
+        src="{{
+          user.photoURL ||
+            'https://firebasestorage.googleapis.com/v0/b/snet2019.appspot.com/o/profile_pictures%2Fdefault.png?alt=media&token=56057ab4-47a9-4e98-95ff-f3a77064b368'
+        }}"
+      />
 
       <mat-menu #profileMenu="matMenu" xPosition="before">
         <button mat-menu-item disableRipple="true">{{ user.name }}</button>
@@ -22,7 +28,9 @@
 
     <ng-template #icon>
       <div class="profile_container">
-        <mat-icon class="profile_placeholder">person</mat-icon>
+        <mat-icon class="profile_placeholder" [routerLink]="['/login']">
+          person
+        </mat-icon>
       </div>
     </ng-template>
   </mat-toolbar>

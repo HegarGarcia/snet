@@ -1,15 +1,27 @@
 <div class="grid">
   <mat-card>
     <mat-card-title>
-      Inicio sesión
+      Crear cuenta
     </mat-card-title>
 
     <mat-card-content>
       <form
         class="login-form"
-        [formGroup]="loginForm"
-        (ngSubmit)="loginForm.valid && signIn()"
+        [formGroup]="signUpForm"
+        (ngSubmit)="signUpForm.valid && signUp()"
       >
+        <mat-form-field class="input-full-width">
+          <input
+            matInput
+            placeholder="Nombre"
+            type="text"
+            formControlName="name"
+            required
+          />
+          <mat-error *ngIf="signUpForm.get('name').invalid">{{
+            getNameError()
+          }}</mat-error>
+        </mat-form-field>
         <mat-form-field class="input-full-width">
           <input
             matInput
@@ -18,7 +30,7 @@
             formControlName="email"
             required
           />
-          <mat-error *ngIf="loginForm.get('email').invalid">{{
+          <mat-error *ngIf="signUpForm.get('email').invalid">{{
             getEmailError()
           }}</mat-error>
         </mat-form-field>
@@ -31,29 +43,19 @@
             formControlName="password"
             required
           />
-          <mat-error *ngIf="loginForm.get('password').invalid">{{
+          <mat-error *ngIf="signUpForm.get('password').invalid">{{
             getPasswordError()
           }}</mat-error>
         </mat-form-field>
 
         <button mat-flat-button color="primary" type="submit">
-          Iniciar sesión
+          Crear cuenta
         </button>
 
-        <a mat-stroked-button color="primary" [routerLink]="['/signup']">
-          Crear cuenta
+        <a mat-stroked-button color="primary" [routerLink]="['/login']">
+          Iniciar sesión
         </a>
       </form>
     </mat-card-content>
-
-    <mat-divider></mat-divider>
-
-    <mat-card-footer>
-      <img
-        class="google_img"
-        src="../../../assets/google_sign_in.png"
-        (click)="auth.signInWithGoogle()"
-      />
-    </mat-card-footer>
   </mat-card>
 </div>

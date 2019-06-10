@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@core/auth/auth.service';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
-// import { AuthService } from '@core/auth/auth.service';
+import { take } from 'rxjs/operators';
+
+import { PostsService, IPost } from '@core/posts/posts.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +12,29 @@ import { AuthService } from '@core/auth/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(public auth: AuthService) {}
+  @ViewChild('autosize', { static: false }) autosize: CdkTextareaAutosize;
+  public posts: IPost[];
+  public contentForm = new FormControl('', [
+    Validators.minLength(1),
+    Validators.maxLength(100)
+  ]);
 
-  ngOnInit() {}
+  constructor(private postsService: PostsService, private ngZone: NgZone) {}
+
+  ngOnInit() {
+    this.postsService.getTimeline().subscribe(data => (this.posts = data));
+  }
+
+  triggerResize() {
+    this.ngZone.onStable
+      .pipe(take(1))
+      .subscribe(() => this.autosize.resizeToFitContent(true));
+  }
+
+  submit() {
+    if (this.contentForm.valid) {
+      this.postsService.add(this.contentForm.value);
+      this.contentForm.reset();
+    }
+  }
 }

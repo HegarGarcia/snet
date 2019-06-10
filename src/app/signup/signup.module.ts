@@ -2,26 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { PostComponent } from './post/post.component';
-import { DialogComponent } from './dialog/dialog.component';
+import { SignupRoutingModule } from './signup-routing.module';
+import { SignupComponent } from './signup/signup.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [PostComponent, DialogComponent],
+  declarations: [SignupComponent],
   imports: [
     CommonModule,
+    SignupRoutingModule,
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule,
-    MatInputModule
-  ],
-  exports: [PostComponent],
-  entryComponents: [DialogComponent]
+    MatDividerModule,
+    MatInputModule,
+    MatDialogModule
+  ]
 })
-export class SharedModule {}
+export class SignupModule {}

@@ -1,3 +1,21 @@
-<p>
-  post works!
-</p>
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar [src]="post.publisherPhotoURL" />
+    <mat-card-title>{{ post.publisherName }}</mat-card-title>
+    <mat-card-subtitle>{{
+      post.timestamp.toDate().toDateString()
+    }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>
+      {{ post.content }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <button mat-flat-button (click)="like()">
+      <span class="likes">{{ post.likeCount }}</span>
+      <mat-icon [inline]="true">thumb_up</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

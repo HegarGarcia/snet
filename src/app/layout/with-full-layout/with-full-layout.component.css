@@ -1,4 +1,7 @@
 main.full_layout {
+  padding-top: 1rem;
   padding-right: 30vw;
   padding-left: 30vw;
+
+  height: calc(100% - 46px);
 }

@@ -1,2 +1,25 @@
-<h2>Home</h2>
-<button *ngIf="auth.user | async" (click)="auth.signOut()">Logout</button>
+<!-- Input for adding post -->
+<mat-card class="form">
+  <form class="content_form" (ngSubmit)="submit()">
+    <mat-form-field class="full-width">
+      <mat-label>Post</mat-label>
+      <textarea
+        class="input_box"
+        matInput
+        [formControl]="contentForm"
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        (keydown)="triggerResize()"
+      ></textarea>
+    </mat-form-field>
+    <button mat-icon-button aria-label="Clear" [disabled]="!contentForm.valid">
+      <mat-icon>
+        send
+      </mat-icon>
+    </button>
+  </form>
+</mat-card>
+
+<div class="posts">
+  <app-post *ngFor="let post of posts" [post]="post"></app-post>
+</div>
