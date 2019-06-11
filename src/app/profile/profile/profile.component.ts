@@ -14,5 +14,4 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.postsService.getTimeline().subscribe(data => (this.posts = data));
   }
-
 }

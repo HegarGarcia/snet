@@ -12,16 +12,12 @@
       class="profile_container"
       [matMenuTriggerFor]="profileMenu"
     >
-      <img
-        class="profile_picture"
-        src="{{
-          user.photoURL ||
-            'https://firebasestorage.googleapis.com/v0/b/snet2019.appspot.com/o/profile_pictures%2Fdefault.png?alt=media&token=56057ab4-47a9-4e98-95ff-f3a77064b368'
-        }}"
-      />
+      <img class="profile_picture" src="{{ user.photoURL }}" />
 
       <mat-menu #profileMenu="matMenu" xPosition="before">
-        <button mat-menu-item disableRipple="true">{{ user.name }}</button>
+        <button mat-menu-item disableRipple="true" [routerLink]="['/profile']">
+          {{ user.name }}
+        </button>
         <button mat-menu-item (click)="auth.signOut()">Cerrar sesión</button>
       </mat-menu>
     </div>

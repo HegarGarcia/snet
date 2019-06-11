@@ -1,21 +1,35 @@
-<div *ngIf="auth.user | async as user; else icon">
-  <img
-    class="profilePic"
-    src="{{
-      user.photoURL ||
-        'https://firebasestorage.googleapis.com/v0/b/snet2019.appspot.com/o/profile_pictures%2Fdefault.png?alt=media&token=56057ab4-47a9-4e98-95ff-f3a77064b368'
-    }}"
-  />
-  <h1>{{ user.name }}</h1>
+<div *ngIf="auth.user | async as user">
+  <div class="profile-info">
+    <img class="profilePic" src="{{ user.photoURL }}" />
+    <div>
+      <span class="mat-h1">{{ user.name }}</span>
+      <p class="info-title">Email:</p>
+      <p class="info-content">{{ user.email }}</p>
+
+      <ng-template *ngIf="user.phoneNumber">
+        <p class="info-title">Teléfono:</p>
+        <p class="info-content">{{ user.phoneNumber }}</p>
+      </ng-template>
+
+      <button mat-flat-button color="primary">
+        Seguir
+      </button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
   <mat-tab-group>
     <mat-tab label="Publicaciones">
-      <h1>aqui los posts xd</h1>
+      <app-post
+        class="posts-container"
+        *ngFor="let post of posts"
+        [post]="post"
+      ></app-post>
     </mat-tab>
-    <mat-tab label="Información">
-      <p>Nombre: {{ user.name }}</p>
-      <p>Correo Electronico: {{ user.email }}</p>
-      <p>Telefono: xd</p>
-      <p>No se que mas poner aiuda</p>
-    </mat-tab>
+
+    <mat-tab label="Seguidores"></mat-tab>
+
+    <mat-tab label="Seguidos"></mat-tab>
   </mat-tab-group>
 </div>
