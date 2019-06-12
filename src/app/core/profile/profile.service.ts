@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
 @Injectable({
   providedIn: CoreModule
 })
-export class ProfilesService {
+export class ProfileService {
   constructor(private afs: AngularFirestore) {}
 
   public get(uid: string) {
