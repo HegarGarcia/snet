@@ -3,7 +3,6 @@ import { AuthService } from '@core/auth/auth.service';
 import { ProfilesService } from '@core/profiles/profiles.service';
 import { FormControl, Validators } from '@angular/forms';
 
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +16,7 @@ export class HeaderComponent {
   ]);
 
   public searchResults: any[];
-  constructor(public auth: AuthService, public profiles: ProfilesService, public dialog: MatDialog) {}
+  constructor(public auth: AuthService, public profiles: ProfilesService) {}
 
   submit(){
     this.profiles.getByName(this.searchInput.value).subscribe(data => {
