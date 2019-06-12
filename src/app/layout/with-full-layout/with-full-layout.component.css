@@ -3,5 +3,5 @@ main.full_layout {
   padding-right: 30vw;
   padding-left: 30vw;
 
-  height: calc(100% - 46px);
+  min-height: calc(100% - 46px);
 }
