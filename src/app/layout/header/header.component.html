@@ -15,7 +15,11 @@
       <img class="profile_picture" src="{{ user.photoURL }}" />
 
       <mat-menu #profileMenu="matMenu" xPosition="before">
-        <button mat-menu-item disableRipple="true" [routerLink]="['/profile']">
+        <button
+          mat-menu-item
+          disableRipple="true"
+          [routerLink]="['/profile', user.uid]"
+        >
           {{ user.name }}
         </button>
         <button mat-menu-item (click)="auth.signOut()">Cerrar sesión</button>
