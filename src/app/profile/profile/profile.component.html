@@ -28,8 +28,12 @@
       ></app-post>
     </mat-tab>
 
-    <mat-tab label="Seguidores"></mat-tab>
+    <mat-tab label="Seguidores" *ngIf="followers | async as users">
+      <app-user-list [users]="users"></app-user-list>
+    </mat-tab>
 
-    <mat-tab label="Seguidos"></mat-tab>
+    <mat-tab label="Seguidos" *ngIf="followed | async as users">
+      <app-user-list [users]="users"></app-user-list>
+    </mat-tab>
   </mat-tab-group>
 </div>

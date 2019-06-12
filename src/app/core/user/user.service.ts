@@ -4,8 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { CoreModule } from '@core/core.module';
 import { IUser } from '@core/auth/auth.service';
 
-import { take } from 'rxjs/operators';
-
 @Injectable({
   providedIn: CoreModule
 })
@@ -17,10 +15,10 @@ export class UserService {
   }
 
   public getFollowers(uid: string) {
-    return this.afs.doc<IUser>(`users/${uid}/followers`).valueChanges();
+    return this.afs.collection<IUser>(`users/${uid}/followers`).valueChanges();
   }
 
   public getFollowed(uid: string) {
-    return this.afs.doc<IUser>(`users/${uid}/followed`).valueChanges();
+    return this.afs.collection<IUser>(`users/${uid}/followed`).valueChanges();
   }
 }

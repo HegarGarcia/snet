@@ -16,6 +16,9 @@ import { Observable } from 'rxjs';
 export class ProfileComponent implements OnInit {
   public posts: Observable<IPost[]>;
   public user: Observable<IUser>;
+  public followers: Observable<IUser[]>;
+  public followed: Observable<IUser[]>;
+  private uid: string;
 
   constructor(
     private postsService: PostsService,
@@ -31,6 +34,12 @@ export class ProfileComponent implements OnInit {
       )
     );
 
+    this.followers = this.user.pipe(
+      switchMap(user => this.userService.getFollowers(user.uid))
+    );
+    this.followed = this.user.pipe(
+      switchMap(user => this.userService.getFollowed(user.uid))
+    );
     this.posts = this.user.pipe(
       switchMap(({ uid }) => uid && this.postsService.from(uid))
     );
