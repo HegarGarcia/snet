@@ -84,7 +84,7 @@ export class PostsService {
   public from(uid: string) {
     return this.afs
       .collection<IPost>('posts', ref =>
-        ref.where('uid', '==', uid).orderBy('timestamp', 'desc')
+        ref.where('publisher', '==', uid).orderBy('timestamp', 'desc')
       )
       .valueChanges();
   }

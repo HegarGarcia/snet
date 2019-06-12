@@ -1,14 +1,14 @@
-<div *ngIf="auth.user | async as user">
+<div *ngIf="user | async as userData">
   <div class="profile-info">
-    <img class="profilePic" src="{{ user.photoURL }}" />
+    <img class="profilePic" src="{{ userData.photoURL }}" />
     <div>
-      <span class="mat-h1">{{ user.name }}</span>
+      <span class="mat-h1">{{ userData.name }}</span>
       <p class="info-title">Email:</p>
-      <p class="info-content">{{ user.email }}</p>
+      <p class="info-content">{{ userData.email }}</p>
 
-      <ng-template *ngIf="user.phoneNumber">
+      <ng-template *ngIf="userData.phoneNumber">
         <p class="info-title">Teléfono:</p>
-        <p class="info-content">{{ user.phoneNumber }}</p>
+        <p class="info-content">{{ userData.phoneNumber }}</p>
       </ng-template>
 
       <button mat-flat-button color="primary">
@@ -23,7 +23,7 @@
     <mat-tab label="Publicaciones">
       <app-post
         class="posts-container"
-        *ngFor="let post of posts"
+        *ngFor="let post of posts | async"
         [post]="post"
       ></app-post>
     </mat-tab>

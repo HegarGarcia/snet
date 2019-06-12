@@ -3,14 +3,7 @@
   <form class="content_form" (ngSubmit)="submit()">
     <mat-form-field class="full-width">
       <mat-label>Post</mat-label>
-      <textarea
-        class="input_box"
-        matInput
-        [formControl]="contentForm"
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        (keydown)="triggerResize()"
-      ></textarea>
+      <input class="input_box" matInput [formControl]="contentForm" />
     </mat-form-field>
     <button mat-icon-button aria-label="Clear" [disabled]="!contentForm.valid">
       <mat-icon>
