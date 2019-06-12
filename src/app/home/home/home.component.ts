@@ -5,6 +5,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 
 import { PostsService, IPost } from '@core/posts/posts.service';
+import { ProfilesService } from '@core/profiles/profiles.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
     Validators.maxLength(100)
   ]);
 
-  constructor(private postsService: PostsService, private ngZone: NgZone) {}
+  constructor(private postsService: PostsService, private ngZone: NgZone, private profiles: ProfilesService) {}
 
   ngOnInit() {
     this.postsService.getTimeline().subscribe(data => (this.posts = data));

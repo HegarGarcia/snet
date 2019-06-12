@@ -12,17 +12,23 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HeaderComponent, WithFullLayoutComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,
-    MatToolbarModule,
+    MatToolbarModule, 
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
   ]
 })
 export class LayoutModule {}

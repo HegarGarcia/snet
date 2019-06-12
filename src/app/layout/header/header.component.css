@@ -24,3 +24,9 @@ mat-toolbar {
   vertical-align: middle;
   text-align: center;
 }
+
+.home_link {
+  font-size: 18;
+  color: white;
+  text-decoration: none;
+}

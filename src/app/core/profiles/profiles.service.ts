@@ -18,4 +18,8 @@ export class ProfilesService {
       .valueChanges()
       .pipe(take(1));
   }
+
+  public getByName(name: string){
+    return this.afs.collection('users', ref => ref.where('name', '==', name)).valueChanges();
+  }
 }

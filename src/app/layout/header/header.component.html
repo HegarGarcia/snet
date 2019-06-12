@@ -1,11 +1,21 @@
 <header>
   <mat-toolbar color="primary">
+    <!--
     <a [routerLink]="['/']" mat-icon-button>
       <mat-icon class="brand__logo">home</mat-icon>
-      <!-- <span>Home</span> -->
+
     </a>
+    -->
+    <form (ngSubmit)="submit()">
+      <mat-form-field>
+          <input 
+            matInput 
+            [formControl]="searchInput"
+          >
+      </mat-form-field>
+    </form>
     <span class="spacing"></span>
-    <span>SNET</span>
+    <a class="home_link" [routerLink]="['/']">SNET</a>
     <span class="spacing"></span>
     <div
       *ngIf="auth.user | async as user; else icon"
