@@ -8,6 +8,7 @@ import { auth } from 'firebase/app';
 
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { PresenceService } from '@core/presence/presence.service';
 
 export interface IUser {
   uid: string;
@@ -27,7 +28,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private presence: PresenceService
   ) {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -108,6 +110,7 @@ export class AuthService {
   }
 
   public async signOut() {
+    await this.presence.setPresence('offline');
     await this.afAuth.auth.signOut();
     this.router.navigate(['login']);
   }
