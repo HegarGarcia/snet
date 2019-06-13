@@ -1,0 +1,17 @@
+mat-list-item {
+  outline: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: yellow;
+}

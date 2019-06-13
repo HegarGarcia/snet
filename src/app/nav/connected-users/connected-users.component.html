@@ -1,0 +1,19 @@
+<mat-nav-list>
+  <mat-list-item
+    *ngFor="let user of presenceData | async"
+    [routerLink]="['/profile', user.uid]"
+  >
+    <mat-icon
+      mat-list-icon
+      [ngClass]="{
+        green: user.status === 'online',
+        yellow: user.status === 'away',
+        red: user.status === 'offline'
+      }"
+      >account_circle</mat-icon
+    >
+    <span mat-line [style.fontSize]="'12px'">
+      {{ user.name }}
+    </span>
+  </mat-list-item>
+</mat-nav-list>

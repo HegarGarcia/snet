@@ -7,6 +7,7 @@ import * as firebase from 'firebase/app';
 
 import { tap, map, switchMap, first } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { IFollower } from '@core/user/user.service';
 
 @Injectable({
   providedIn: CoreModule
@@ -22,7 +23,7 @@ export class PresenceService {
   }
 
   getPresence(uid: string) {
-    return this.db.object(`status/${uid}`).valueChanges();
+    return this.db.object<{ status: string }>(`status/${uid}`).valueChanges();
   }
 
   getUser() {

@@ -4,8 +4,10 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { CoreModule } from '@core/core.module';
 import { IUser, AuthService } from '@core/auth/auth.service';
 import { take, map, switchMap, mergeMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export interface IFollower {
+  uid?: string;
   name: string;
   photoURL: string;
 }
@@ -25,7 +27,7 @@ export class UserService {
       .valueChanges({ idField: 'uid' });
   }
 
-  public getFollowed(uid: string) {
+  public getFollowed(uid: string): Observable<IFollower[]> {
     return this.afs
       .collection<IFollower>(`users/${uid}/followed`)
       .valueChanges({ idField: 'uid' });

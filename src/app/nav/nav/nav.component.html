@@ -8,11 +8,10 @@
     [opened]="(isHandset$ | async) === false"
   >
     <mat-toolbar>Contactos</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
+    <app-connected-users
+      *ngIf="auth.user | async as user"
+      [uid]="user.uid"
+    ></app-connected-users>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -22,6 +21,7 @@
           aria-label="Toggle sidenav"
           mat-icon-button
           (click)="drawer.toggle()"
+          *ngIf="auth.user | async"
         >
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
@@ -29,7 +29,11 @@
 
         <span class="spacing"></span>
 
-        <button mat-icon-button (click)="showSearch = !showSearch">
+        <button
+          mat-icon-button
+          (click)="showSearch = !showSearch"
+          *ngIf="auth.user | async"
+        >
           <mat-icon>search</mat-icon>
         </button>
 
