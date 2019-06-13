@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IUser } from '@core/auth/auth.service';
+import { IUser, AuthService } from '@core/auth/auth.service';
 import { PostsService, IPost } from '@core/posts/posts.service';
-import { UserService } from '@core/user/user.service';
+import { UserService, IFollower } from '@core/user/user.service';
 
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -16,14 +16,15 @@ import { Observable } from 'rxjs';
 export class ProfileComponent implements OnInit {
   public posts: Observable<IPost[]>;
   public user: Observable<IUser>;
-  public followers: Observable<IUser[]>;
-  public followed: Observable<IUser[]>;
-  private uid: string;
+  public followers: Observable<IFollower[]>;
+  public followed: Observable<IFollower[]>;
+  public isFollowing;
 
   constructor(
-    private postsService: PostsService,
     private route: ActivatedRoute,
-    private userService: UserService
+    public auth: AuthService,
+    private postsService: PostsService,
+    public userService: UserService
   ) {}
 
   ngOnInit() {
@@ -35,13 +36,16 @@ export class ProfileComponent implements OnInit {
     );
 
     this.followers = this.user.pipe(
-      switchMap(user => this.userService.getFollowers(user.uid))
+      switchMap(({ uid }) => this.userService.getFollowers(uid))
     );
     this.followed = this.user.pipe(
-      switchMap(user => this.userService.getFollowed(user.uid))
+      switchMap(({ uid }) => this.userService.getFollowed(uid))
     );
     this.posts = this.user.pipe(
       switchMap(({ uid }) => uid && this.postsService.from(uid))
+    );
+    this.isFollowing = this.user.pipe(
+      switchMap(({ uid }) => uid && this.userService.isFollowing(uid))
     );
   }
 }

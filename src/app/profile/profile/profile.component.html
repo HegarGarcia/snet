@@ -11,9 +11,16 @@
         <p class="info-content">{{ userData.phoneNumber }}</p>
       </ng-template>
 
-      <button mat-flat-button color="primary">
-        Seguir
-      </button>
+      <div *ngIf="auth.user | async as current">
+        <button
+          mat-flat-button
+          color="primary"
+          *ngIf="current.uid != userData.uid"
+          (click)="userService.follow(current, userData)"
+        >
+          {{ !(isFollowing | async) ? 'Seguir' : 'Dejar de seguir' }}
+        </button>
+      </div>
     </div>
   </div>
 
