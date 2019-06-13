@@ -22,17 +22,6 @@ export class ProfilesService {
   public getByName(name: string) {
     return this.afs
       .collection<IUser>('users', ref => ref.where('name', '==', name))
-      .snapshotChanges()
-      .pipe(
-        map(users =>
-          users.map(
-            user =>
-              ({
-                id: user.payload.doc.id,
-                ...user.payload.doc.data()
-              } as IUser)
-          )
-        )
-      );
+      .valueChanges({ idField: 'uid' });
   }
 }

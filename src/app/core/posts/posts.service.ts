@@ -42,15 +42,7 @@ export class PostsService {
               .collection<IPost>(`users/${user.uid}/timeline`, ref =>
                 ref.orderBy('timestamp', 'desc')
               )
-              .snapshotChanges()
-              .pipe(
-                map(postsData =>
-                  postsData.map(({ payload: { doc } }) => ({
-                    id: doc.id,
-                    ...doc.data()
-                  }))
-                )
-              )
+              .valueChanges({ idField: 'uid' })
           : of(null)
       )
     );
