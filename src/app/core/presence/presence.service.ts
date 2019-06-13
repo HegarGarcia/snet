@@ -16,7 +16,6 @@ export class PresenceService {
     private afAuth: AngularFireAuth,
     private db: AngularFireDatabase
   ) {
-    console.log('let there be presence');
     this.updateOnUser().subscribe();
     this.updateOnDisconnect().subscribe();
     this.updateOnAway();
