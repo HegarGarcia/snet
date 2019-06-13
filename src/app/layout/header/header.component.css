@@ -11,12 +11,15 @@
   padding: 6px 0px 8px 0px;
   max-height: 46px;
   box-sizing: border-box;
+  margin: 0 14px;
 }
 
 mat-toolbar {
-  padding-right: 30vw;
-  padding-left: 30vw;
-  height: 46px;
+  /* height: 46px; */
+}
+
+mat-form-field {
+  padding-bottom: 0;
 }
 
 .profile_placeholder {
@@ -29,4 +32,8 @@ mat-toolbar {
   font-size: 18;
   color: white;
   text-decoration: none;
+}
+
+.full-width {
+  width: 100%;
 }

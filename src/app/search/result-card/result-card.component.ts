@@ -1,10 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-export interface IResult {
-  name: string;
-  email: string;
-  photoURL: string;
-}
+import { IUser } from '@core/auth/auth.service';
 
 @Component({
   selector: 'app-result-card',
@@ -12,8 +7,7 @@ export interface IResult {
   styleUrls: ['./result-card.component.css']
 })
 export class ResultCardComponent {
-  @Input() res: IResult;
+  @Input() res: IUser;
 
-  constructor() { }
-
+  constructor() {}
 }

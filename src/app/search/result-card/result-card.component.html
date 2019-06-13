@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card [routerLink]="['/profile', res.uid]">
   <mat-card-header>
     <img mat-card-avatar [src]="res.photoURL" />
     <mat-card-title>{{ res.name }}</mat-card-title>

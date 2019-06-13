@@ -4,7 +4,7 @@ import { CoreModule } from '../core.module';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { IUser } from '@core/auth/auth.service';
 
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: CoreModule
@@ -19,7 +19,20 @@ export class ProfilesService {
       .pipe(take(1));
   }
 
-  public getByName(name: string){
-    return this.afs.collection('users', ref => ref.where('name', '==', name)).valueChanges();
+  public getByName(name: string) {
+    return this.afs
+      .collection<IUser>('users', ref => ref.where('name', '==', name))
+      .snapshotChanges()
+      .pipe(
+        map(users =>
+          users.map(
+            user =>
+              ({
+                id: user.payload.doc.id,
+                ...user.payload.doc.data()
+              } as IUser)
+          )
+        )
+      );
   }
 }

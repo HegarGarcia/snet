@@ -1,3 +1,6 @@
 <div>
-  <app-result-card *ngFor="let res of searchResults" [res]="res"></app-result-card>
+  <app-result-card
+    *ngFor="let res of searchResults | async"
+    [res]="res"
+  ></app-result-card>
 </div>

@@ -14,9 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
-  declarations: [HeaderComponent, WithFullLayoutComponent],
+  declarations: [HeaderComponent, WithFullLayoutComponent, SidenavComponent],
   imports: [
     CommonModule,
     LayoutRoutingModule,
