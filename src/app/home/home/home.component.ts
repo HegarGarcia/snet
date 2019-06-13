@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { PostsService, IPost } from '@core/posts/posts.service';
-import { ProfilesService } from '@core/profiles/profiles.service';
 
 @Component({
   selector: 'app-home',

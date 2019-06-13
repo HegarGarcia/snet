@@ -1,7 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '@core/auth/auth.service';
 import { ProfilesService } from '@core/profiles/profiles.service';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,13 +17,13 @@ export class HeaderComponent {
   ]);
 
   public searchResults: any[];
-  constructor(public auth: AuthService, public profiles: ProfilesService) {}
+  constructor(public auth: AuthService, public profiles: ProfilesService,public router: Router) {}
 
   submit(){
-    this.profiles.getByName(this.searchInput.value).subscribe(data => {
+    /*this.profiles.getByName(this.searchInput.value).subscribe(data => {
       this.searchResults = data;
-      console.log(this.searchResults);
-    });
+    });*/
+    this.router.navigate(["./search", {query: this.searchInput.value}]);
   }
 }
 
