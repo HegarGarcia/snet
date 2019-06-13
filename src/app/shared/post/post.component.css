@@ -9,3 +9,9 @@
 mat-card {
   margin-bottom: 1rem;
 }
+
+mat-card-header {
+  outline: 0;
+  border: none;
+  cursor: pointer;
+}
