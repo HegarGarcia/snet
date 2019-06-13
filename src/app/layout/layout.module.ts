@@ -20,15 +20,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     LayoutRoutingModule,
-    MatToolbarModule, 
+    MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule,
-    
+    ReactiveFormsModule
   ]
 })
 export class LayoutModule {}

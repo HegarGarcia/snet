@@ -22,13 +22,29 @@ export class UserService {
   public getFollowers(uid: string) {
     return this.afs
       .collection<IFollower>(`users/${uid}/followers`)
-      .valueChanges();
+      .snapshotChanges()
+      .pipe(
+        map(followers =>
+          followers.map(follower => ({
+            uid: follower.payload.doc.id,
+            ...follower.payload.doc.data()
+          }))
+        )
+      );
   }
 
   public getFollowed(uid: string) {
     return this.afs
       .collection<IFollower>(`users/${uid}/followed`)
-      .valueChanges();
+      .snapshotChanges()
+      .pipe(
+        map(followers =>
+          followers.map(follower => ({
+            uid: follower.payload.doc.id,
+            ...follower.payload.doc.data()
+          }))
+        )
+      );
   }
 
   public isFollowing(followed: string) {
