@@ -1,7 +1,8 @@
 <header>
   <mat-toolbar [color]="!showSearch ? 'primary' : 'accent'">
     <mat-toolbar-row *ngIf="!showSearch">
-      <a class="home_link" [routerLink]="['/']">SNET</a>
+      <button mat-icon-button><mat-icon>menu</mat-icon></button>
+      <span [routerLink]="['/']">SNET</span>
 
       <span class="spacing"></span>
 

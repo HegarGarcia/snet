@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { LayoutRoutingModule } from './layout-routing.module';
+import { NavRoutingModule } from './nav-routing.module';
 
 import { HeaderComponent } from './header/header.component';
 
@@ -15,12 +15,20 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { NavComponent } from './nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatListModule } from '@angular/material';
 
 @NgModule({
-  declarations: [HeaderComponent, WithFullLayoutComponent, SidenavComponent],
+  declarations: [
+    HeaderComponent,
+    WithFullLayoutComponent,
+    SidenavComponent,
+    NavComponent
+  ],
   imports: [
     CommonModule,
-    LayoutRoutingModule,
+    NavRoutingModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -28,7 +36,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     MatMenuModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule,
+    MatListModule
   ]
 })
-export class LayoutModule {}
+export class NavModule {}

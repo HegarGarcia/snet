@@ -20,7 +20,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         loadChildren: '../profile/profile.module#ProfileModule'
       },
-      { path: 'search', loadChildren: '../search/search.module#SearchModule'}
+      { path: 'search', loadChildren: '../search/search.module#SearchModule' }
     ]
   }
 ];
@@ -29,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class LayoutRoutingModule {}
+export class NavRoutingModule {}

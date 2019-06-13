@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 
-import { LayoutModule } from './layout/layout.module';
+import { NavModule } from './nav/nav.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +17,7 @@ import { LayoutModule } from './layout/layout.module';
     BrowserAnimationsModule,
     CoreModule,
     SharedModule,
-    LayoutModule,
+    NavModule,
     RouterModule.forRoot([])
   ],
   providers: [],
