@@ -5,6 +5,8 @@
       <mat-label>Post</mat-label>
       <input class="input_box" matInput [formControl]="contentForm" />
     </mat-form-field>
+    <br>
+    <input class="file-input" type="file" [formControl]="photoUpload" (change)="detectFiles($event.target.files)">
     <button mat-icon-button aria-label="Clear" [disabled]="!contentForm.valid">
       <mat-icon>
         send

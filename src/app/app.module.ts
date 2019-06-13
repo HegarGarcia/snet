@@ -10,6 +10,9 @@ import { SharedModule } from './shared/shared.module';
 
 import { NavModule } from './nav/nav.module';
 
+import { AngularFirestore } from "@angular/fire/firestore";
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -20,7 +23,7 @@ import { NavModule } from './nav/nav.module';
     NavModule,
     RouterModule.forRoot([])
   ],
-  providers: [],
+  providers: [AngularFirestore, AngularFireStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -19,6 +19,7 @@ export interface IPost {
   publisherName: string;
   likeCount: number;
   timestamp: firestore.Timestamp;
+  hasImage?: boolean;
 }
 
 @Injectable({
@@ -52,14 +53,15 @@ export class PostsService {
     return this.posts.doc<IPost>(id).valueChanges();
   }
 
-  public add(content: string) {
+  public add(content: string, hasImage: boolean) {
     const post: IPost = {
       publisher: this.user.uid,
       likeCount: 0,
       publisherName: this.user.name,
       publisherPhotoURL: this.user.photoURL,
       timestamp: firestore.Timestamp.fromDate(new Date()),
-      content
+      content,
+      hasImage
     };
 
     return this.posts.add(post);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IUser, AuthService } from '@core/auth/auth.service';
@@ -7,6 +7,7 @@ import { UserService, IFollower } from '@core/user/user.service';
 
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,8 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     public auth: AuthService,
     private postsService: PostsService,
-    public userService: UserService
+    public userService: UserService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -47,5 +49,26 @@ export class ProfileComponent implements OnInit {
     this.isFollowing = this.user.pipe(
       switchMap(({ uid }) => uid && this.userService.isFollowing(uid))
     );
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditDialog, {
+      width: '250px',
+      data: {name: "xd"}
+    });
+  }
+}
+
+@Component({
+  selector: 'edit-dialog',
+  templateUrl: 'edit-dialog.html'
+})
+export class EditDialog {
+  constructor(public dialogRef: MatDialogRef<EditDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: Object){
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
