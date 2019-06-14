@@ -54,11 +54,4 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  // // Determines if the upload task is active
-  // isActive(snapshot) {
-  //   return (
-  //     snapshot.state === 'running' &&
-  //     snapshot.bytesTransferred < snapshot.totalBytes
-  //   );
-  // }
 }
