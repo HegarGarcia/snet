@@ -1,5 +1,12 @@
 <h1 mat-dialog-title>Cambiar Nombre</h1>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button>Ok</button>
+<div mat-dialog-content>
+    <form (ngSubmit)="submit()">
+        <mat-form-field class="full-width">
+            <input matInput [formControl]="newName"  value="{{ data.name }}">
+        </mat-form-field>
+        <div mat-dialog-actions>
+            <button mat-button>Aceptar</button>
+        </div>
+    </form>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
 </div>

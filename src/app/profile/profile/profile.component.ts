@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IUser, AuthService } from '@core/auth/auth.service';
 import { PostsService, IPost } from '@core/posts/posts.service';
 import { UserService, IFollower } from '@core/user/user.service';
+import { ReactiveFormsModule, FormControl, Validators  } from '@angular/forms';
 
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -20,6 +21,7 @@ export class ProfileComponent implements OnInit {
   public followers: Observable<IFollower[]>;
   public followed: Observable<IFollower[]>;
   public isFollowing;
+  public profile;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +38,9 @@ export class ProfileComponent implements OnInit {
           params.has('id') && this.userService.getProfile(params.get('id'))
       )
     );
+    this.user.pipe(
+      switchMap(({uid}) => this.userService.getProfile(uid))
+    ).subscribe(result => console.log(result));
 
     this.followers = this.user.pipe(
       switchMap(({ uid }) => this.userService.getFollowers(uid))
@@ -52,9 +57,13 @@ export class ProfileComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(EditDialog, {
-      width: '250px',
-      data: {name: "xd"}
+    this.user.pipe(
+      switchMap(({uid}) => this.userService.getProfile(uid))
+    ).subscribe(result => {
+      const dialogRef = this.dialog.open(EditDialog, {
+        width: '350px',
+        data: result
+      });
     });
   }
 }
@@ -64,11 +73,23 @@ export class ProfileComponent implements OnInit {
   templateUrl: 'edit-dialog.html'
 })
 export class EditDialog {
-  constructor(public dialogRef: MatDialogRef<EditDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: Object){
-  }
 
+  public newName = new FormControl('',[
+    Validators.minLength(1),
+    Validators.maxLength(100)
+  ]);
+
+  constructor(public dialogRef: MatDialogRef<EditDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: IUser, public userService: UserService){
+    }
+ 
+  submit(){
+    this.userService.editName(this.data.uid, this.newName.value)
+    this.dialogRef.close();
+    alert("Se ha cambiado el nombre")
+  }
   onNoClick(): void {
+    console.log("cancelar")
     this.dialogRef.close();
   }
 }

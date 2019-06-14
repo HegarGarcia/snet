@@ -10,6 +10,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '@shared/shared.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { MatInputModule } from "@angular/material";
+import { MAT_DIALOG_DATA } from '@angular/material';
+
 
 @NgModule({
   declarations: [ProfileComponent, EditDialog],
@@ -22,7 +27,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatTabsModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule
   ]
 })
 export class ProfileModule {}

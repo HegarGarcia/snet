@@ -17,6 +17,13 @@ export interface IFollower {
 export class UserService {
   constructor(private afs: AngularFirestore, private auth: AuthService) {}
 
+  public editName(uid: string, newUsername: string){
+    console.log(newUsername)
+    return this.afs.doc(`users/${uid}`).update({
+      name: newUsername
+    });
+  }
+
   public getProfile(uid: string) {
     return this.afs.doc<IUser>(`users/${uid}`).valueChanges();
   }
