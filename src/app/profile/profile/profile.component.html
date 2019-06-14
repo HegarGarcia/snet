@@ -1,4 +1,4 @@
-<div *ngIf="user | async as userData">
+<div *ngIf="user as userData">
   <div class="profile-info">
     <img class="profilePic" src="{{ userData.photoURL }}" />
     <div>
@@ -10,7 +10,7 @@
           *ngIf="current.uid == userData.uid"
           (click)="openDialog()"
         >
-        <mat-icon>edit</mat-icon>
+          <mat-icon>edit</mat-icon>
         </button>
       </div>
       <p class="info-title">Email:</p>
@@ -38,7 +38,6 @@
 
   <mat-tab-group>
     <mat-tab label="Publicaciones">
-      <br>
       <app-post
         class="posts-container"
         *ngFor="let post of posts | async"
@@ -47,12 +46,10 @@
     </mat-tab>
 
     <mat-tab label="Seguidores" *ngIf="followers | async as users">
-      <br>
       <app-user-list [users]="users"></app-user-list>
     </mat-tab>
 
     <mat-tab label="Seguidos" *ngIf="followed | async as users">
-      <br>
       <app-user-list [users]="users"></app-user-list>
     </mat-tab>
   </mat-tab-group>

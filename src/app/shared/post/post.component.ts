@@ -23,6 +23,7 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.post);
     if (!this.post.hasImage) {
       return;
     }

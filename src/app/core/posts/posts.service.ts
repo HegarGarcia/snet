@@ -80,7 +80,7 @@ export class PostsService {
       .collection<IPost>('posts', ref =>
         ref.where('publisher', '==', uid).orderBy('timestamp', 'desc')
       )
-      .valueChanges();
+      .valueChanges({ idField: 'id' });
   }
 
   public like(id: string) {

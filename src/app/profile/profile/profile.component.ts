@@ -17,7 +17,7 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 })
 export class ProfileComponent implements OnInit {
   public posts: Observable<IPost[]>;
-  public user: Observable<IUser>;
+  public user: IUser;
   public followers: Observable<IFollower[]>;
   public followed: Observable<IFollower[]>;
   public isFollowing;
@@ -31,29 +31,21 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
-  ngOnInit() {
-    this.user = this.route.paramMap.pipe(
-      switchMap(
-        params =>
-          params.has('id') && this.userService.getProfile(params.get('id'))
+  async ngOnInit() {
+    this.user = await this.route.paramMap
+      .pipe(
+        switchMap(
+          params =>
+            params.has('id') && this.userService.getProfile(params.get('id'))
+        ),
+        first()
       )
-    );
+      .toPromise();
 
-    this.followers = this.user.pipe(
-      switchMap(({ uid }) => this.userService.getFollowers(uid))
-    );
-
-    this.followed = this.user.pipe(
-      switchMap(({ uid }) => this.userService.getFollowed(uid))
-    );
-
-    this.posts = this.user.pipe(
-      switchMap(({ uid }) => uid && this.postsService.from(uid))
-    );
-
-    this.isFollowing = this.user.pipe(
-      switchMap(({ uid }) => uid && this.userService.isFollowing(uid))
-    );
+    this.followers = this.userService.getFollowers(this.user.uid);
+    this.followed = this.userService.getFollowed(this.user.uid);
+    this.posts = this.postsService.from(this.user.uid);
+    this.isFollowing = this.userService.isFollowing(this.user.uid);
   }
 
   async openDialog() {
