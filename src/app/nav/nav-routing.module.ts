@@ -16,12 +16,12 @@ const routes: Routes = [
       },
       {
         path: 'login',
-        canActivate: [LoggedinGuard],
+        // canActivate: [LoggedinGuard],
         loadChildren: '../login/login.module#LoginModule'
       },
       {
         path: 'signup',
-        canActivate: [LoggedinGuard],
+        // canActivate: [LoggedinGuard],
         loadChildren: '../signup/signup.module#SignupModule'
       },
       {
