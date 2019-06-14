@@ -5,11 +5,13 @@
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
-    *ngIf="auth.user | async as user"
+    [opened]="(isHandset$ | async) === false && auth.user | async"
   >
     <mat-toolbar>Contactos</mat-toolbar>
-    <app-connected-users [uid]="user.uid"></app-connected-users>
+    <app-connected-users
+      *ngIf="auth.user | async as user"
+      [uid]="user.uid"
+    ></app-connected-users>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -21,7 +23,11 @@
           (click)="drawer.toggle()"
           *ngIf="auth.user | async"
         >
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          <mat-icon
+            aria-label="Side nav toggle icon"
+            *ngIf="auth.user | async as user"
+            >menu</mat-icon
+          >
         </button>
         <span class="logo" [routerLink]="['/']">SNET</span>
 

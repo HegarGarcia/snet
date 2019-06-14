@@ -3,6 +3,7 @@
     class="content_form"
     (ngSubmit)="postForm.valid && submit()"
     [formGroup]="postForm"
+    autocomplete="off"
   >
     <mat-form-field class="full-width">
       <mat-label>Post</mat-label>

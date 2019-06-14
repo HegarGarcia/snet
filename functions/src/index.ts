@@ -11,6 +11,15 @@ export interface IPost {
   timestamp: admin.firestore.Timestamp;
 }
 
+export interface IUser {
+  uid: string;
+  name: string;
+  photoURL: string;
+  email: string;
+  address?: string;
+  phone?: string;
+}
+
 const fanOut = async (doc: FirebaseFirestore.DocumentSnapshot) => {
   const firestore = admin.firestore();
   const post = doc.data() as IPost;
@@ -93,3 +102,36 @@ export const authUser = functions.auth.user().onCreate(async credentials => {
     firestore.doc(`users/${credentials.uid}`).update({ photoURL: storage[0] })
   ]);
 });
+
+export const deleteUser = functions.firestore
+  .document('users/{uid}')
+  .onDelete(async snap => {
+    const firestore = admin.firestore();
+    const user = snap.data() as IUser;
+
+    await admin
+      .auth()
+      .deleteUser(user.uid)
+      .catch(console.log);
+
+    const followers = await firestore
+      .collection(`users/${user.uid}/followers`)
+      .get();
+    const followed = await firestore
+      .collection(`users/${user.uid}/followed`)
+      .get();
+
+    if (!followers.empty) {
+      followers.forEach(async follower => {
+        const path = `users/${follower.id}/followed/${user.uid}`;
+        await firestore.doc(path).delete();
+      });
+    }
+
+    if (!followed.empty) {
+      followed.forEach(async follower => {
+        const path = `users/${follower.id}/followers/${user.uid}`;
+        await firestore.doc(path).delete();
+      });
+    }
+  });
