@@ -8,7 +8,7 @@
 
 .content_form {
   display: grid;
-  grid-template-columns: 11fr 3fr;
+  grid-template-columns: 10fr 3fr;
   grid-template-rows: 1fr;
   grid-gap: 0.5rem;
   justify-items: center;

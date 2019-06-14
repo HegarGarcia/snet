@@ -5,3 +5,10 @@ main.full_layout {
 
   min-height: calc(100% - 46px);
 }
+
+@media (max-width: 700px) {
+  main.full_layout {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
