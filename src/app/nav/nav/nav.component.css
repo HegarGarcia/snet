@@ -32,10 +32,6 @@
   margin: 0 14px;
 }
 
-mat-toolbar {
-  /* height: 46px; */
-}
-
 mat-form-field {
   padding-bottom: 0;
 }
@@ -47,7 +43,6 @@ mat-form-field {
 }
 
 .home_link {
-  /* font-size: 18; */
   color: black;
   text-decoration: none;
 }

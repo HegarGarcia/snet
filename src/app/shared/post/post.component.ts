@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 
 import { IPost, PostsService } from '@core/posts/posts.service';
-import { IUser } from '@core/auth/auth.service';
+import { IUser, AuthService } from '@core/auth/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -18,11 +18,11 @@ export class PostComponent implements OnInit {
 
   constructor(
     public posts: PostsService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    public auth: AuthService
   ) {}
 
   ngOnInit() {
-    console.log(this.post);
     if (!this.post.hasImage) {
       return;
     }
@@ -30,9 +30,5 @@ export class PostComponent implements OnInit {
     this.downloadURL = this.storage
       .ref(`posts/${this.post.id}`)
       .getDownloadURL();
-  }
-
-  like() {
-    this.posts.like(this.post.id);
   }
 }

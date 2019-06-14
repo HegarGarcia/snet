@@ -1,10 +1,28 @@
 <mat-card>
-  <mat-card-header [routerLink]="['/profile', post.publisher]">
-    <img mat-card-avatar [src]="post.publisherPhotoURL" />
-    <mat-card-title>{{ post.publisherName }}</mat-card-title>
+  <mat-card-header>
+    <img
+      mat-card-avatar
+      [src]="post.publisherPhotoURL"
+      [routerLink]="['/profile', post.publisher]"
+    />
+
+    <mat-card-title [routerLink]="['/profile', post.publisher]">{{
+      post.publisherName
+    }}</mat-card-title>
+
     <mat-card-subtitle>{{
       post.timestamp.toDate().toDateString()
     }}</mat-card-subtitle>
+
+    <span class="spacing"></span>
+
+    <button
+      mat-icon-button
+      *ngIf="(auth.user | async)?.uid === post.publisher"
+      (click)="posts.delete(post.id)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
   </mat-card-header>
   <img mat-card-image *ngIf="post.hasImage" [src]="downloadURL | async" />
   <mat-card-content>
@@ -13,7 +31,7 @@
     </p>
   </mat-card-content>
   <mat-card-actions class="actions">
-    <button mat-flat-button (click)="like()">
+    <button mat-flat-button (click)="posts.like(post.id)">
       <span class="likes">{{ post.likeCount }}</span>
       <mat-icon [inline]="true">thumb_up</mat-icon>
     </button>

@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [PostComponent, DialogComponent, UserListComponent],
@@ -25,7 +26,8 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatInputModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule
   ],
   exports: [PostComponent, UserListComponent],
   entryComponents: [DialogComponent]
