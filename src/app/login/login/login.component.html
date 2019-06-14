@@ -1,0 +1,59 @@
+<div class="grid">
+  <mat-card>
+    <mat-card-title>
+      Inicio sesión
+    </mat-card-title>
+
+    <mat-card-content>
+      <form
+        class="login-form"
+        [formGroup]="loginForm"
+        (ngSubmit)="loginForm.valid && signIn()"
+      >
+        <mat-form-field class="input-full-width">
+          <input
+            matInput
+            placeholder="Email"
+            type="email"
+            formControlName="email"
+            required
+          />
+          <mat-error *ngIf="loginForm.get('email').invalid">{{
+            getEmailError()
+          }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <input
+            matInput
+            placeholder="Password"
+            type="password"
+            formControlName="password"
+            required
+          />
+          <mat-error *ngIf="loginForm.get('password').invalid">{{
+            getPasswordError()
+          }}</mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit">
+          Iniciar sesión
+        </button>
+
+        <a mat-stroked-button color="primary" [routerLink]="['/signup']">
+          Crear cuenta
+        </a>
+      </form>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-footer>
+      <img
+        class="google_img"
+        src="../../../assets/google_sign_in.png"
+        (click)="auth.signInWithGoogle()"
+      />
+    </mat-card-footer>
+  </mat-card>
+</div>

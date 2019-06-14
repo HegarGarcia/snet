@@ -1,0 +1,58 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 15vw;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.spacing {
+  flex: 1 1 auto;
+}
+
+.profile_picture {
+  max-width: 2rem;
+  border-radius: 50%;
+}
+
+.profile_container {
+  padding: 6px 0px 8px 0px;
+  max-height: 46px;
+  box-sizing: border-box;
+  margin: 0 14px;
+}
+
+mat-form-field {
+  padding-bottom: 0;
+}
+
+.profile_placeholder {
+  width: 2rem;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.home_link {
+  color: black;
+  text-decoration: none;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.logo {
+  outline: 0;
+  border: none;
+  cursor: pointer;
+}

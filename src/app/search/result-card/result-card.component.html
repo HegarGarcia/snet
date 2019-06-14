@@ -1,0 +1,7 @@
+<mat-card [routerLink]="['/profile', res.uid]">
+  <mat-card-header>
+    <img mat-card-avatar [attr.src]="res.photoURL" />
+    <mat-card-title>{{ res.name }}</mat-card-title>
+    <mat-card-subtitle>{{ res.email }}</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

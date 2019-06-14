@@ -1,0 +1,33 @@
+.profile-info {
+  display: grid;
+  grid-template: 1fr / 1fr 3fr;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.info-title {
+  margin-bottom: 0.2rem;
+  font-weight: 500;
+}
+
+.info-content {
+  margin-top: 0.2rem;
+}
+
+.profilePic {
+  box-sizing: content-box;
+  max-height: 10vw;
+  margin: 0.5rem;
+  border-radius: 100%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: white;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.7);
+}
+
+mat-divider {
+  margin: 1rem 0;
+}

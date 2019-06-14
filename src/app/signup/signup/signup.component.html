@@ -1,0 +1,61 @@
+<div class="grid">
+  <mat-card>
+    <mat-card-title>
+      Crear cuenta
+    </mat-card-title>
+
+    <mat-card-content>
+      <form
+        class="login-form"
+        [formGroup]="signUpForm"
+        (ngSubmit)="signUpForm.valid && signUp()"
+      >
+        <mat-form-field class="input-full-width">
+          <input
+            matInput
+            placeholder="Nombre"
+            type="text"
+            formControlName="name"
+            required
+          />
+          <mat-error *ngIf="signUpForm.get('name').invalid">{{
+            getNameError()
+          }}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <input
+            matInput
+            placeholder="Email"
+            type="email"
+            formControlName="email"
+            required
+          />
+          <mat-error *ngIf="signUpForm.get('email').invalid">{{
+            getEmailError()
+          }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-full-width">
+          <input
+            matInput
+            placeholder="Password"
+            type="password"
+            formControlName="password"
+            required
+          />
+          <mat-error *ngIf="signUpForm.get('password').invalid">{{
+            getPasswordError()
+          }}</mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit">
+          Crear cuenta
+        </button>
+
+        <a mat-stroked-button color="primary" [routerLink]="['/login']">
+          Iniciar sesión
+        </a>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

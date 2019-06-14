@@ -1,0 +1,21 @@
+.likes {
+  padding-right: 0.5rem;
+}
+
+.actions {
+  text-align: right;
+}
+
+mat-card {
+  margin-bottom: 1rem;
+}
+
+mat-card-header {
+  outline: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.spacing {
+  flex: 1 1 auto;
+}

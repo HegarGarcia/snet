@@ -1,0 +1,20 @@
+.input_box {
+  resize: none;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.content_form {
+  display: grid;
+  grid-template-columns: 10fr 3fr;
+  grid-template-rows: 1fr;
+  grid-gap: 0.5rem;
+  justify-items: center;
+  align-items: center;
+}
+
+.form {
+  margin-bottom: 1rem;
+}

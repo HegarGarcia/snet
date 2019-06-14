@@ -1,0 +1,14 @@
+main.full_layout {
+  padding-top: 1rem;
+  padding-right: 30vw;
+  padding-left: 30vw;
+
+  min-height: calc(100% - 46px);
+}
+
+@media (max-width: 700px) {
+  main.full_layout {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

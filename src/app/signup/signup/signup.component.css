@@ -1,0 +1,27 @@
+div.grid {
+  display: grid;
+  grid-template: 1fr / 1fr;
+
+  align-items: center;
+  /* justify-items: center; */
+  height: 100%;
+}
+
+mat-card {
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.input-full-width {
+  width: 100%;
+}
+
+.google_img {
+  margin: 1rem 0;
+  max-height: 3rem;
+}
+
+.login-form button[type='submit'] {
+  margin-right: 0.5rem;
+}
