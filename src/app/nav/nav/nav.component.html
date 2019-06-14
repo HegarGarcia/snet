@@ -6,12 +6,10 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
+    *ngIf="auth.user | async as user"
   >
     <mat-toolbar>Contactos</mat-toolbar>
-    <app-connected-users
-      *ngIf="auth.user | async as user"
-      [uid]="user.uid"
-    ></app-connected-users>
+    <app-connected-users [uid]="user.uid"></app-connected-users>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">

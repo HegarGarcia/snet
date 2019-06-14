@@ -43,7 +43,7 @@ export class PostsService {
               .collection<IPost>(`users/${user.uid}/timeline`, ref =>
                 ref.orderBy('timestamp', 'desc')
               )
-              .valueChanges({ idField: 'uid' })
+              .valueChanges({ idField: 'id' })
           : of(null)
       )
     );

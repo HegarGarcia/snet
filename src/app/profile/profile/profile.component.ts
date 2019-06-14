@@ -5,7 +5,7 @@ import { IUser, AuthService } from '@core/auth/auth.service';
 import { PostsService, IPost } from '@core/posts/posts.service';
 import { UserService, IFollower } from '@core/user/user.service';
 
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
@@ -38,32 +38,36 @@ export class ProfileComponent implements OnInit {
           params.has('id') && this.userService.getProfile(params.get('id'))
       )
     );
-    this.user
-      .pipe(switchMap(({ uid }) => this.userService.getProfile(uid)))
-      .subscribe(result => console.log(result));
 
     this.followers = this.user.pipe(
       switchMap(({ uid }) => this.userService.getFollowers(uid))
     );
+
     this.followed = this.user.pipe(
       switchMap(({ uid }) => this.userService.getFollowed(uid))
     );
+
     this.posts = this.user.pipe(
       switchMap(({ uid }) => uid && this.postsService.from(uid))
     );
+
     this.isFollowing = this.user.pipe(
       switchMap(({ uid }) => uid && this.userService.isFollowing(uid))
     );
   }
 
-  openDialog(): void {
-    this.user
-      .pipe(switchMap(({ uid }) => this.userService.getProfile(uid)))
-      .subscribe(result => {
-        this.dialog.open(EditDialogComponent, {
-          width: '350px',
-          data: result
-        });
-      });
+  async openDialog() {
+    const { uid, name } = await this.auth.user.pipe(first()).toPromise();
+
+    const dialog = this.dialog.open(EditDialogComponent, {
+      width: '350px',
+      data: name
+    });
+
+    dialog
+      .afterClosed()
+      .subscribe(
+        newName => newName && this.userService.updateName(uid, newName)
+      );
   }
 }

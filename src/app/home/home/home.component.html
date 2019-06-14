@@ -1,20 +1,48 @@
-<!-- Input for adding post -->
 <mat-card class="form">
-  <form class="content_form" (ngSubmit)="submit()">
+  <form
+    class="content_form"
+    (ngSubmit)="postForm.valid && submit()"
+    [formGroup]="postForm"
+  >
     <mat-form-field class="full-width">
       <mat-label>Post</mat-label>
-      <input class="input_box" matInput [formControl]="contentForm" />
+      <input class="input_box" matInput formControlName="content" />
     </mat-form-field>
-    <br>
-    <input class="file-input" type="file" [formControl]="photoUpload" (change)="detectFiles($event.target.files)">
-    <button mat-icon-button aria-label="Clear" [disabled]="!contentForm.valid">
-      <mat-icon>
-        send
-      </mat-icon>
-    </button>
+    <div>
+      <button
+        mat-icon-button
+        aria-label="add photo"
+        [disabled]="postForm.invalid"
+        type="button"
+        (click)="fileInput.click()"
+      >
+        <mat-icon>
+          add_a_photo
+        </mat-icon>
+      </button>
+
+      <input
+        #fileInput
+        hidden
+        type="file"
+        accept="image/png, image/jpeg"
+        (change)="detectFiles($event.target.files)"
+      />
+
+      <button
+        mat-icon-button
+        aria-label="post"
+        [disabled]="postForm.invalid"
+        type="submit"
+      >
+        <mat-icon>
+          send
+        </mat-icon>
+      </button>
+    </div>
   </form>
 </mat-card>
 
 <div class="posts">
-  <app-post *ngFor="let post of posts" [post]="post"></app-post>
+  <app-post *ngFor="let post of posts | async" [post]="post"></app-post>
 </div>

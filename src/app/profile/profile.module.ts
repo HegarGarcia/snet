@@ -17,7 +17,7 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [ProfileComponent, EditDialogComponent],
-  entryComponents: [],
+  entryComponents: [EditDialogComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,

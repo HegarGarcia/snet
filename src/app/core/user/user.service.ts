@@ -17,8 +17,7 @@ export interface IFollower {
 export class UserService {
   constructor(private afs: AngularFirestore, private auth: AuthService) {}
 
-  public editName(uid: string, newUsername: string){
-    console.log(newUsername)
+  public updateName(uid: string, newUsername: string) {
     return this.afs.doc(`users/${uid}`).update({
       name: newUsername
     });
