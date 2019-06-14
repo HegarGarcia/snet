@@ -1,6 +1,6 @@
-<div *ngIf="user as userData">
+<div *ngIf="user | async as userData">
   <div class="profile-info">
-    <img class="profilePic" src="{{ userData.photoURL }}" />
+    <img class="profilePic" [attr.src]="userData.photoURL" />
     <div>
       <span class="mat-h1">{{ userData.name }}</span>
       <div *ngIf="auth.user | async as current">
